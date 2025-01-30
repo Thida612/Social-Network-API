@@ -5,3 +5,5 @@ const routes = require("./routes");
 
 // Set the port for the server
 const PORT = process.env.PORT || 3001;
+// Initialize the Express application
+const app = express();
