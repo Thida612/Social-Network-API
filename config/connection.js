@@ -7,3 +7,6 @@ const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 // Initialize the Express application
 const app = express();
+// Middleware to parse URL-encoded data and JSON data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
