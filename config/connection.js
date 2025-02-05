@@ -1,21 +1,12 @@
-// Import necessary modules
-const express = require("express");
-const db = require("./config/connection");
-const routes = require("./routes");
+const mongoose = require('mongoose');
 
-// Set the port for the server
-const PORT = process.env.PORT || 3001;
-// Initialize the Express application
-const app = express();
-// Middleware to parse URL-encoded data and JSON data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Use the routes defined in the routes folder
-app.use(routes);a
+mongoose.set('strictQuery', true);
 
-// Start the server once the database connection is open
-db.once("open", () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-  });
+// Wrap Mongoose around local connection to MongoDB
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+// Export connection 
+module.exports = mongoose.connection;
